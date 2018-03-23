@@ -4,6 +4,8 @@ __lua__
 --coffee central
 --by jakub gruszecki
 
+-- SYSTEM FUNCTIONS
+
 function _init()
 end
 
@@ -11,9 +13,81 @@ function _update()
 end
 
 function _draw()
-    rectfill(0,0,128,128,7)
-    --palt(0,false)
-    --sspr(0,0,128,128,0,0)
+ drawBackground();
+ drawMenu();
+end
+
+function drawBackground()
+ rrectfill(screen, black);
+end
+
+function drawMenu()
+ menuRect = gridToScreen({x=0, y=13, width=16, height=3});
+ borderRect(menuRect, brown, red);
+end
+
+-- GLOBAL CONSTANTS
+
+screen = {
+ x = 0, y = 0,
+ width = 128, height = 128
+};
+
+black = 0;
+dark_blue = 1;
+dark_purple = 2;
+dark_purple = 3;
+brown = 4;
+dark_gray = 5;
+light_gray = 6;
+white = 7;
+red = 8;
+orange = 9;
+yellow = 10;
+green = 11;
+blue = 12;
+indigo = 13;
+pink = 14;
+peach = 15;
+
+-- GRID 8x8
+
+grid = {
+ width = 8, height = 8
+};
+
+function gridToScreen(rect)
+ return {
+  x = grid.width * rect.x,
+  y = grid.height * rect.y,
+  width = grid.width * rect.width,
+  height = grid.height * rect.height
+ };
+end
+
+-- RECTANGLES
+
+function borderRect(rectangle, backColor, borderColor)
+ rrectfill(rectangle, backColor);
+ rrect(rectangle, borderColor);
+end
+
+function rrectfill(rectangle, color)
+ rectfill(
+  rectangle.x,
+  rectangle.y,
+  rectangle.x + rectangle.width - 1,
+  rectangle.y + rectangle.height - 1,
+  color);
+end
+
+function rrect(rectangle, color)
+ rect(
+  rectangle.x,
+  rectangle.y,
+  rectangle.x + rectangle.width - 1,
+  rectangle.y + rectangle.height - 1,
+  color);
 end
 __gfx__
 5540540504050505040000555555555555555555555555555555555555555555555545f454454545454454545454545454545454545445445454545454554545

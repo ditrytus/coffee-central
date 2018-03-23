@@ -9,3 +9,4 @@ log.txt
 sdl_controllers.txt
 *.html
 *.js
+.vscode
