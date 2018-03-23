@@ -18,13 +18,14 @@ function _draw()
 end
 
 function drawBackground()
- rrectfill(screen, black);
+ cls(white);
 end
 
 function drawMenu()
  menuRect = gridToScreen({x=0, y=13, width=16, height=3});
- --borderRect(menuRect, brown, red);
- roundRect(menuRect, 10, brown);
+ palt(0, false);
+ roundRect(menuRect, 3, black, brown);
+ palt();
 end
 
 -- GLOBAL CONSTANTS
@@ -93,28 +94,46 @@ function roundRectData(rectangle, rad)
  };
 end
 
-function roundRect(rectangle, rad, col)
- color(col);
-
- data = roundRectData(rectangle, rad, col);
+function roundRect(rectangle, rad, borderColor, fillColor)
+ data = roundRectData(rectangle, rad);
 
  clip(rectangle.x, rectangle.y, rad, rad);
- circ(data.top.left.x, data.top.left.y, rad);
+ if fillColor != nil then
+  circfill(data.top.left.x, data.top.left.y, rad, fillColor);
+ end
+ circ(data.top.left.x, data.top.left.y, rad, borderColor);
 
  clip(data.top.right.x, rectangle.y, rad, rad);
- circ(data.top.right.x - 1, data.top.right.y, rad);
+ if fillColor != nil then
+  circfill(data.top.right.x - 1, data.top.right.y, rad, fillColor);
+ end
+ circ(data.top.right.x - 1, data.top.right.y, rad, borderColor);
 
  clip(rectangle.x, data.bottom.left.y, rad, rad);
- circ(data.bottom.left.x, data.bottom.left.y - 1, rad);
+ if fillColor != nil then
+  circfill(data.bottom.left.x, data.bottom.left.y - 1, rad, fillColor);
+ end
+ circ(data.bottom.left.x, data.bottom.left.y - 1, rad, borderColor);
 
  clip(data.bottom.right.x, data.bottom.right.y, rad, rad);
- circ(data.bottom.right.x - 1, data.bottom.right.y - 1, rad);
+ if fillColor != nil then
+  circfill(data.bottom.right.x - 1, data.bottom.right.y - 1, rad, fillColor); 
+ end
+ circ(data.bottom.right.x - 1, data.bottom.right.y - 1, rad, borderColor);
 
  clip(data.top.left.x, rectangle.y, data.top.right.x - data.top.left.x, rectangle.height);
- rrect(rectangle, col);
+ if fillColor != nil then
+  rrectfill(rectangle, fillColor); 
+ end
+ rrect(rectangle, borderColor);
 
  clip(rectangle.x, data.top.left.y, rectangle.width, data.bottom.left.y - data.top.left.y);
- rrect(rectangle, col);
+ if fillColor != nil then
+  rrectfill(rectangle, fillColor);  
+ end
+ rrect(rectangle, borderColor);
+
+ clip();
 end
 
 function borderRect(rectangle, backColor, borderColor)
