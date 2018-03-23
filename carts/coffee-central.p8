@@ -23,7 +23,8 @@ end
 
 function drawMenu()
  menuRect = gridToScreen({x=0, y=13, width=16, height=3});
- borderRect(menuRect, brown, red);
+ --borderRect(menuRect, brown, red);
+ roundRect(menuRect, 10, brown);
 end
 
 -- GLOBAL CONSTANTS
@@ -66,6 +67,44 @@ function gridToScreen(rect)
 end
 
 -- RECTANGLES
+
+function roundRect(rectangle, rad, col)
+ color(col);
+
+ top_left_circ_x = rectangle.x + rad;
+ top_left_circ_y = rectangle.y + rad;
+
+ top_right_circ_x = rectangle.x + rectangle.width - rad;
+ top_right_circ_y = top_left_circ_y;
+
+ bottom_left_circ_x = top_left_circ_x;
+ bottom_left_circ_y = rectangle.y + rectangle.height - rad;
+
+ bottom_right_circ_x = top_right_circ_x;
+ bottom_right_circ_y = bottom_left_circ_y;
+
+ clip(rectangle.x, rectangle.y, rad, rad);
+ --rectfill(0,0,128,128,white);
+ circ(top_left_circ_x, top_left_circ_y, rad);
+
+ clip(top_right_circ_x, rectangle.y, rad, rad);
+ --rectfill(0,0,128,128,white);
+ circ(top_right_circ_x - 1, top_right_circ_y, rad);
+
+ clip(rectangle.x, bottom_left_circ_y, rad, rad);
+ --rectfill(0,0,128,128,white);
+ circ(bottom_left_circ_x, bottom_left_circ_y - 1, rad);
+
+ clip(bottom_right_circ_x, bottom_right_circ_y, rad, rad);
+ --rectfill(0,0,128,128,white);
+ circ(bottom_right_circ_x - 1, bottom_right_circ_y - 1, rad);
+
+ clip(top_left_circ_x, rectangle.y, top_right_circ_x - top_left_circ_x, rectangle.height);
+ rrect(rectangle, col);
+
+ clip(rectangle.x, top_left_circ_y, rectangle.width, bottom_left_circ_y - top_left_circ_y);
+ rrect(rectangle, col);
+end
 
 function borderRect(rectangle, backColor, borderColor)
  rrectfill(rectangle, backColor);
