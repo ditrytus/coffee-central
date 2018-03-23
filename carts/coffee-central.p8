@@ -7,6 +7,7 @@ __lua__
 -- SYSTEM FUNCTIONS
 
 function _init()
+ initMenu();
 end
 
 function _update()
@@ -21,11 +22,30 @@ function drawBackground()
  cls(white);
 end
 
+-- MENU
+
+menuRect = {};
+coffeePanelRect = {};
+handPanelRect = {};
+
+function initMenu()
+ menuRect = gridToScreen({x = 0, y = 13, width = 16, height = 3});
+
+ coffeePanelPadding = 2;
+ coffeePanelRect = {
+  x = menuRect.x + coffeePanelPadding,
+  y = menuRect.y + coffeePanelPadding,
+  width = rectY2(menuRect) - menuRect.y - coffeePanelPadding * 2 + 1,
+  height = rectY2(menuRect) - menuRect.y - coffeePanelPadding * 2 + 1
+ };
+ 
+ handPanelRect = moveRect(coffeePanelRect, coffeePanelRect.width + 1, 0);
+end
+
 function drawMenu()
- menuRect = gridToScreen({x=0, y=13, width=16, height=3});
- palt(0, false);
  roundRect(menuRect, 3, black, brown);
- palt();
+ roundRect(coffeePanelRect, 3, black, white);
+ roundRect(handPanelRect, 3, black, white);
 end
 
 -- GLOBAL CONSTANTS
@@ -68,6 +88,15 @@ function gridToScreen(rect)
 end
 
 -- RECTANGLES
+
+function moveRect(rectangle, x, y)
+ return {
+  x = rectangle.x + x,
+  y = rectangle.y + y,
+  width = rectangle.width,
+  height = rectangle.height
+ };
+end
 
 function roundRectData(rectangle, rad)
  return {
@@ -141,12 +170,20 @@ function borderRect(rectangle, backColor, borderColor)
  rrect(rectangle, borderColor);
 end
 
+function rectX2(rectangle)
+ return rectangle.x + rectangle.width - 1;
+end
+
+function rectY2(rectangle)
+ return rectangle.y + rectangle.height - 1;
+end
+
 function rrectfill(rectangle, color)
  rectfill(
   rectangle.x,
   rectangle.y,
-  rectangle.x + rectangle.width - 1,
-  rectangle.y + rectangle.height - 1,
+  rectX2(rectangle),
+  rectY2(rectangle),
   color);
 end
 
@@ -154,8 +191,8 @@ function rrect(rectangle, color)
  rect(
   rectangle.x,
   rectangle.y,
-  rectangle.x + rectangle.width - 1,
-  rectangle.y + rectangle.height - 1,
+  rectX2(rectangle),
+  rectY2(rectangle),
   color);
 end
 __gfx__
