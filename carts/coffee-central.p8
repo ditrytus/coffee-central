@@ -68,37 +68,52 @@ end
 
 -- RECTANGLES
 
+function roundRectData(rectangle, rad)
+ return {
+  top = {
+   left = {
+    x = rectangle.x + rad,
+    y = rectangle.y + rad
+   },
+   right = {
+    x = rectangle.x + rectangle.width - rad,
+    y = rectangle.y + rad
+   }
+  },
+  bottom = {
+   left = {
+    x = rectangle.x + rad,
+    y = rectangle.y + rectangle.height - rad
+   },
+   right = {
+    x = rectangle.x + rectangle.width - rad,
+    y = rectangle.y + rectangle.height - rad
+   }
+  },
+ };
+end
+
 function roundRect(rectangle, rad, col)
  color(col);
 
- top_left_circ_x = rectangle.x + rad;
- top_left_circ_y = rectangle.y + rad;
-
- top_right_circ_x = rectangle.x + rectangle.width - rad;
- top_right_circ_y = top_left_circ_y;
-
- bottom_left_circ_x = top_left_circ_x;
- bottom_left_circ_y = rectangle.y + rectangle.height - rad;
-
- bottom_right_circ_x = top_right_circ_x;
- bottom_right_circ_y = bottom_left_circ_y;
+ data = roundRectData(rectangle, rad, col);
 
  clip(rectangle.x, rectangle.y, rad, rad);
- circ(top_left_circ_x, top_left_circ_y, rad);
+ circ(data.top.left.x, data.top.left.y, rad);
 
- clip(top_right_circ_x, rectangle.y, rad, rad);
- circ(top_right_circ_x - 1, top_right_circ_y, rad);
+ clip(data.top.right.x, rectangle.y, rad, rad);
+ circ(data.top.right.x - 1, data.top.right.y, rad);
 
- clip(rectangle.x, bottom_left_circ_y, rad, rad);
- circ(bottom_left_circ_x, bottom_left_circ_y - 1, rad);
+ clip(rectangle.x, data.bottom.left.y, rad, rad);
+ circ(data.bottom.left.x, data.bottom.left.y - 1, rad);
 
- clip(bottom_right_circ_x, bottom_right_circ_y, rad, rad);
- circ(bottom_right_circ_x - 1, bottom_right_circ_y - 1, rad);
+ clip(data.bottom.right.x, data.bottom.right.y, rad, rad);
+ circ(data.bottom.right.x - 1, data.bottom.right.y - 1, rad);
 
- clip(top_left_circ_x, rectangle.y, top_right_circ_x - top_left_circ_x, rectangle.height);
+ clip(data.top.left.x, rectangle.y, data.top.right.x - data.top.left.x, rectangle.height);
  rrect(rectangle, col);
 
- clip(rectangle.x, top_left_circ_y, rectangle.width, bottom_left_circ_y - top_left_circ_y);
+ clip(rectangle.x, data.top.left.y, rectangle.width, data.bottom.left.y - data.top.left.y);
  rrect(rectangle, col);
 end
 
