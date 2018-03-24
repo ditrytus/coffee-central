@@ -33,9 +33,7 @@ function initMenu()
  );
  
  handPanelRect = coffeePanelRect:move(
-  Point:new(
-   coffeePanelRect.width + 1,
-   0));
+  Point:new(coffeePanelRect.width + 1, 0));
 end
 
 function drawMenu()
@@ -80,13 +78,12 @@ peach = 15;
 grid_cell_size = 8;
 
 function gridToScreen(rect)
- local cell_size = 8;
- return {
-  x = grid_cell_size * rect.x,
-  y = grid_cell_size * rect.y,
-  width = grid_cell_size * rect.width,
-  height = grid_cell_size * rect.height
- };
+ return Rectangle:new(
+  grid_cell_size * rect.x,
+  grid_cell_size * rect.y,
+  grid_cell_size * rect.width,
+  grid_cell_size * rect.height
+ );
 end
 
 -- POINT
@@ -131,69 +128,67 @@ function Rectangle:new(x, y, w, h)
 end
 
 function Rectangle:move(point)
- return {
-  x = self.x + point.x,
-  y = self.y + point.y,
-  width = self.width,
-  height = self.height
- };
+ return Rectangle:new(
+  self.x + point.x,
+  self.y + point.y,
+  self.width,
+  self.height
+ );
+end
+
+function Rectangle:pos()
+ return Point:new(self.x, self.y);
 end
 
 -- DRAW ROUNDED RECTANGLES
 
 function roundRect(rectangle, rad, borderColor, fillColor)
 
- local top_left_x = rectangle.x + rad;
- local top_left_y = rectangle.y + rad;
- local top_right_x = rectangle.x + rectangle.width - rad;
- local top_right_y = rectangle.y + rad;
- local bottom_left_x = rectangle.x + rad;
- local bottom_left_y = rectangle.y + rectangle.height - rad;
- local bottom_right_x = rectangle.x + rectangle.width - rad;
- local bottom_right_y = rectangle.y + rectangle.height - rad;
+ local top_left = Point:new(rectangle.x + rad, rectangle.y + rad);
+ local top_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rad)
+ local bottom_left = Point:new(rectangle.x + rad, rectangle.y + rectangle.height - rad);
+ local bottom_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rectangle.height - rad);
 
- local hasFill = fillColor != nil;
- clip(rectangle.x, rectangle.y, rad, rad);
- if hasFill then
-  circfill(top_left_x, top_left_y, rad, fillColor);
+ drawCorner(rectangle:pos(), top_left, rad, fillColor, borderColor);
+
+ drawCorner(
+  Point:new(top_right.x, rectangle.y),
+  top_right + Point:new(-1,0),
+  rad, fillColor, borderColor
+ );
+
+ drawCorner(
+  Point:new(rectangle.x, bottom_left.y),
+  bottom_left + Point:new(0,-1),
+  rad, fillColor, borderColor
+ );
+
+ drawCorner(
+  bottom_right,
+  bottom_right + Point:new(-1,-1),
+  rad, fillColor, borderColor
+ );
+
+ clip(top_left.x, rectangle.y, top_right.x - top_left.x, rectangle.height);
+ borderRect(rectangle, fillColor, borderColor);
+
+ clip(rectangle.x, top_left.y, rectangle.width, bottom_left.y - top_left.y);
+ borderRect(rectangle, fillColor, borderColor);
+end
+
+function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
+ clip(clipPoint.x, clipPoint.y, rad, rad);
+ if fillColor != nil then
+  pcircfill(circPoint, rad, fillColor); 
  end
- circ(top_left_x, top_left_y, rad, borderColor);
-
- clip(top_right_x, rectangle.y, rad, rad);
- if hasFill then
-  circfill(top_right_x - 1, top_right_y, rad, fillColor);
- end
- circ(top_right_x - 1, top_right_y, rad, borderColor);
-
- clip(rectangle.x, bottom_left_y, rad, rad);
- if hasFill then
-  circfill(bottom_left_x, bottom_left_y - 1, rad, fillColor);
- end
- circ(bottom_left_x, bottom_left_y - 1, rad, borderColor);
-
- clip(bottom_right_x, bottom_right_y, rad, rad);
- if hasFill then
-  circfill(bottom_right_x - 1, bottom_right_y - 1, rad, fillColor); 
- end
- circ(bottom_right_x - 1, bottom_right_y - 1, rad, borderColor);
-
- clip(top_left_x, rectangle.y, top_right_x - top_left_x, rectangle.height);
- if hasFill then
-  rrectfill(rectangle, fillColor); 
- end
- rrect(rectangle, borderColor);
-
- clip(rectangle.x, top_left_y, rectangle.width, bottom_left_y - top_left_y);
- if hasFill then
-  rrectfill(rectangle, fillColor);  
- end
- rrect(rectangle, borderColor);
-
+ pcirc(circPoint, rad, borderColor);
  clip();
 end
 
-function borderRect(rectangle, backColor, borderColor)
- rrectfill(rectangle, backColor);
+function borderRect(rectangle, fillColor, borderColor)
+ if fillColor != nil then
+  rrectfill(rectangle, fillColor);
+ end
  rrect(rectangle, borderColor);
 end
 
@@ -203,6 +198,14 @@ end
 
 function rectY2(rectangle)
  return rectangle.y + rectangle.height - 1;
+end
+
+function pcirc(point, rad, color)
+ circ(point.x, point.y, rad, color);
+end
+
+function pcircfill(point, rad, color)
+ circfill(point.x, point.y, rad, color);
 end
 
 function rrectfill(rectangle, color)
