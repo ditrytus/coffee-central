@@ -174,6 +174,8 @@ function roundRect(rectangle, rad, borderColor, fillColor)
 
  clip(rectangle.x, top_left.y, rectangle.width, bottom_left.y - top_left.y);
  borderRect(rectangle, fillColor, borderColor);
+
+ clip();
 end
 
 function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
@@ -182,7 +184,6 @@ function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
   pcircfill(circPoint, rad, fillColor); 
  end
  pcirc(circPoint, rad, borderColor);
- clip();
 end
 
 function borderRect(rectangle, fillColor, borderColor)
@@ -191,6 +192,8 @@ function borderRect(rectangle, fillColor, borderColor)
  end
  rrect(rectangle, borderColor);
 end
+
+-- OTHER
 
 function rectX2(rectangle)
  return rectangle.x + rectangle.width - 1;
