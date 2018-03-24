@@ -14,21 +14,12 @@ function _update()
 end
 
 function _draw()
- drawBackground();
+ cls(white);
+
  drawMenu();
 end
 
--- BACKGROUND
-
-function drawBackground()
- cls(white);
-end
-
 -- MENU
-
-menuRect = {};
---coffeePanelRect = {};
-handPanelRect = {};
 
 function initMenu()
  menuRect = gridToScreen({x = 0, y = 13, width = 16, height = 3});
@@ -45,8 +36,6 @@ function initMenu()
   Point:new(
    coffeePanelRect.width + 1,
    0));
-
- initCup();
 end
 
 function drawMenu()
@@ -59,20 +48,11 @@ end
 
 -- MENU - COFFEE CUP
 
-cupPosition = {};
-cupSprite = {x = 0, y = 0, width = 16, height = 14};
-
-function initCup()
- cupPosition = {
-  x = coffeePanelRect.x + 2,
-  y = coffeePanelRect.y + 3
- };
-end
-
 function drawCup()
  palt(black, false);
  palt(white, true);
- sspr(cupSprite.x, cupSprite.y, cupSprite.width, cupSprite.height, cupPosition.x, cupPosition.y);
+ -- CUP SPRITE
+ sspr(0, 0, 16, 14, coffeePanelRect.x + 2, coffeePanelRect.y + 3);
  palt();
 end
 
