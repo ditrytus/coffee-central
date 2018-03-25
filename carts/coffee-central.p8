@@ -7,7 +7,7 @@ __lua__
 -- SYSTEM FUNCTIONS
 
 function _init()
- 
+ initSprites();
  initMenu();
 end
 
@@ -26,6 +26,9 @@ function drawBackground()
  fillp(0);
 
  drawSprite(sprite.table, Point:new(12,87));
+ drawSprite(sprite.table, Point:new(42,80));
+ drawSprite(sprite.table, Point:new(72,87));
+ drawSprite(sprite.table, Point:new(102,80));
 end
 
 -- SPRITES
@@ -49,7 +52,7 @@ end
 function drawSprite(s, pos)
  local sRect = s.rect;
  palt(black, false);
- palt(sprite.bkg, true);
+ palt(s.bkg, true);
  sspr(sRect.x, sRect.y, sRect.width, sRect.height, pos.x, pos.y);
  palt();
 end
