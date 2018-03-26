@@ -10,4 +10,4 @@ sdl_controllers.txt
 *.html
 *.js
 .vscode
-.p8
+*.p8
