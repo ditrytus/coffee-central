@@ -9,6 +9,7 @@ __lua__
 function _init()
  initSprites();
  initMenu();
+ initCounter();
 end
 
 function _update()
@@ -16,6 +17,8 @@ end
 
 function _draw()
  drawBackground();
+ drawCounter();
+ drawTables();
  drawMenu();
 end
 
@@ -24,13 +27,6 @@ function drawBackground()
  rectfill(0, 0, 127, 115, mixColor(peach, white));
  rectfill(0, 115, 127, 127, black);
  fillp(0);
-
- drawTable(Point:new(39,73));
- drawTable(Point:new(99,73));
-
- drawTable(Point:new(9,87));
- drawTable(Point:new(69,87));
- 
 end
 
 -- SPRITES
@@ -72,10 +68,34 @@ end
 
 -- TABLES
 
+function drawTables()
+ drawTable(Point:new(39,73));
+ drawTable(Point:new(99,73));
+
+ drawTable(Point:new(9,87));
+ drawTable(Point:new(69,87));
+end
+
 function drawTable(pos)
  drawSprite(sprite.chair, pos + Point:new(-8, 0));
  drawSprite(sprite.chair, pos + Point:new(sprite.table.rect.width - 1, 0), true);
  drawSprite(sprite.table, pos);
+end
+
+-- COUNTER
+
+function initCounter()
+ counterRect = gridToScreen(Rectangle:new(2, 7, 14, 2));
+ counterSurfaceRect = gridToScreen(Rectangle:new(2, 7, 14, 1));
+ passageRect = gridToScreen(Rectangle:new(0, 7, 2, 1));
+ passageRect.width += 1;
+end
+
+function drawCounter()
+ roundRect(counterRect, 3, black, brown);
+ borderRect(counterSurfaceRect, brown, black);
+ borderRect(passageRect:move(Point:new(0, 2)), brown, black); 
+ borderRect(passageRect, brown, black);
 end
 
 -- MENU
@@ -205,7 +225,7 @@ end
 
 -- DRAW ROUNDED RECTANGLES
 
-function roundRect(rectangle, rad, borderColor, fillColor)
+function roundRect(rectangle, rad, borderColor, fillColor, fillPattern)
  local rectPos = rectangle:pos();
  local radPoint = Point:new(rad, rad);
 
@@ -213,6 +233,8 @@ function roundRect(rectangle, rad, borderColor, fillColor)
  local top_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rad)
  local bottom_left = Point:new(rectangle.x + rad, rectangle.y + rectangle.height - rad);
  local bottom_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rectangle.height - rad);
+
+ iffillp(fillPattern);
 
  drawCorner(rectangle:pos(), top_left, rad, fillColor, borderColor);
 
@@ -241,6 +263,7 @@ function roundRect(rectangle, rad, borderColor, fillColor)
  borderRect(rectangle, fillColor, borderColor);
 
  clip();
+ fillp();
 end
 
 function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
@@ -251,14 +274,22 @@ function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
  pcirc(circPoint, rad, borderColor);
 end
 
-function borderRect(rectangle, fillColor, borderColor)
+function borderRect(rectangle, fillColor, borderColor, fillPattern)
  if fillColor != nil then
+  iffillp(fillPattern);
   rrectfill(rectangle, fillColor);
  end
  rrect(rectangle, borderColor);
+ fillp();
 end
 
 -- OTHER
+
+function iffillp(fillPattern)
+ if fillPattern != nil then
+  fillp(fillPattern);
+ end
+end
 
 function rectX2(rectangle)
  return rectangle.x + rectangle.width - 1;
