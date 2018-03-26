@@ -20,7 +20,7 @@ function _draw()
 end
 
 function drawBackground()
- fillp(0b1100110000110011); -- big checker
+ fillp(0xcc33); -- big checker 
  rectfill(0, 0, 127, 115, mixColor(peach, white));
  rectfill(0, 115, 127, 127, black);
  fillp(0);
@@ -85,7 +85,7 @@ function initCounter()
  counterRect = gridToScreen(Rectangle:new(2, 7, 14, 2));
  counterSurfaceRect = gridToScreen(Rectangle:new(2, 7, 14, 1));
  passageRect = gridToScreen(Rectangle:new(0, 7, 2, 1));
- passageRect.width += 1;
+ passageRect.width = passageRect.width + 1;
 end
 
 function drawCounter()
@@ -265,14 +265,14 @@ end
 
 function drawCorner(clipPoint, circPoint, rad, fillColor, borderColor)
  clip(clipPoint.x, clipPoint.y, rad, rad);
- if fillColor != nil then
+ if fillColor ~= nil then
   pcircfill(circPoint, rad, fillColor); 
  end
  pcirc(circPoint, rad, borderColor);
 end
 
 function borderRect(rectangle, fillColor, borderColor, fillPattern)
- if fillColor != nil then
+ if fillColor ~= nil then
   iffillp(fillPattern);
   rrectfill(rectangle, fillColor);
  end
@@ -283,7 +283,7 @@ end
 -- OTHER
 
 function iffillp(fillPattern)
- if fillPattern != nil then
+ if fillPattern ~= nil then
   fillp(fillPattern);
  end
 end
