@@ -2,7 +2,11 @@
 
 require("point");
 
-Rectangle = {}
+Rectangle = {
+ __mul = function(r, n)
+  return Rectangle:new(r.x * n, r.y * n, r.width * n, r.height * n);
+ end
+}
 
 function Rectangle:new(x, y, w, h)
  local rectangle = {

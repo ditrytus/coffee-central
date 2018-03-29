@@ -85,9 +85,9 @@ end
 -- COUNTER
 
 function initCounter()
- counterRect = gridToScreen(Rectangle:new(2, 7, 14, 2));
- counterSurfaceRect = gridToScreen(Rectangle:new(2, 7, 14, 1));
- passageRect = gridToScreen(Rectangle:new(0, 7, 2, 1));
+ counterRect = Rectangle:new(2, 7, 14, 2) * grid_cell_size;
+ counterSurfaceRect = Rectangle:new(2, 7, 14, 1) * grid_cell_size;
+ passageRect = Rectangle:new(0, 7, 2, 1) * grid_cell_size;
  passageRect.width = passageRect.width + 1;
 end
 
@@ -101,14 +101,16 @@ end
 -- MENU
 
 function initMenu()
- menuRect = gridToScreen(Rectangle:new(0, 13, 16, 3));
+ menuRect = Rectangle:new(0, 13, 16, 3) * grid_cell_size;
 
  local coffeePanelPadding = 2;
+ local size = menuRect:pos2().y - menuRect.y - coffeePanelPadding * 2 + 1;
+ 
  coffeePanelRect = Rectangle:new(
   menuRect.x + coffeePanelPadding,
   menuRect.y + coffeePanelPadding,
-  rectY2(menuRect) - menuRect.y - coffeePanelPadding * 2 + 1,
-  rectY2(menuRect) - menuRect.y - coffeePanelPadding * 2 + 1
+  size,
+  size
  );
  
  handPanelRect = coffeePanelRect:move(
@@ -149,17 +151,6 @@ end
 -- GRID 8x8
 
 grid_cell_size = 8;
-
-function gridToScreen(rect)
- return Rectangle:new(
-  grid_cell_size * rect.x,
-  grid_cell_size * rect.y,
-  grid_cell_size * rect.width,
-  grid_cell_size * rect.height
- );
-end
-
-
 
 -- DRAW ROUNDED RECTANGLES
 
@@ -242,7 +233,7 @@ function rrectfill(rectangle, color)
   rectangle.x,
   rectangle.y,
   rectangle:pos2().x,
-  rectanble:pos2().y,
+  rectangle:pos2().y,
   color);
 end
 
@@ -251,6 +242,6 @@ function rrect(rectangle, color)
   rectangle.x,
   rectangle.y,
   rectangle:pos2().x,
-  rectanble:pos2().y,
+  rectangle:pos2().y,
   color);
 end
