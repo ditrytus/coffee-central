@@ -1,0 +1,10 @@
+version: "3"
+services:
+
+  cart:
+    build:
+      context: .
+    volumes:
+      - "./carts:/carts"
+      - "./src:/src"
+    command: "coffee-central.p8"
