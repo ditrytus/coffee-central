@@ -7,4 +7,4 @@ services:
     volumes:
       - "./carts:/carts"
       - "./src:/src"
-    command: "coffee-central.p8"
+    command: "/carts/coffee-central.p8"
