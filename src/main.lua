@@ -229,14 +229,6 @@ function iffillp(fillPattern)
  end
 end
 
-function rectX2(rectangle)
- return rectangle.x + rectangle.width - 1;
-end
-
-function rectY2(rectangle)
- return rectangle.y + rectangle.height - 1;
-end
-
 function pcirc(point, rad, color)
  circ(point.x, point.y, rad, color);
 end
@@ -249,8 +241,8 @@ function rrectfill(rectangle, color)
  rectfill(
   rectangle.x,
   rectangle.y,
-  rectX2(rectangle),
-  rectY2(rectangle),
+  rectangle:pos2().x,
+  rectanble:pos2().y,
   color);
 end
 
@@ -258,7 +250,7 @@ function rrect(rectangle, color)
  rect(
   rectangle.x,
   rectangle.y,
-  rectX2(rectangle),
-  rectY2(rectangle),
+  rectangle:pos2().x,
+  rectanble:pos2().y,
   color);
 end

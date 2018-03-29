@@ -30,5 +30,5 @@ function Rectangle:pos()
 end
 
 function Rectangle:pos2()
- return Point:new(self.x + self.width, self.y + self.height);
+ return Point:new(self.x + self.width - 1, self.y + self.height - 1);
 end
