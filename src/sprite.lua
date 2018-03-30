@@ -18,7 +18,7 @@ function Sprite:draw(pos, flip_x)
         flip_x = false
     end
     palt(black, false)
-    palt(s.bkg, true)
+    palt(self.backColor, true)
     sspr(sRect.x, sRect.y, sRect.width, sRect.height, pos.x, pos.y, sRect.width, sRect.height, flip_x, false)
     palt()
 end

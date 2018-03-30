@@ -1,16 +1,16 @@
-require("object");
-require("point");
-require("sprite");
+require("object")
+require("point")
+require("rectangle")
+require("sprite")
 
-local Chair = {
-    pos = Point:new(0, 0),
-    sprite = Sprite:new(
-        Rectangle:new(36, 0, 9, 16),
-        black
-    ),
-    draw = function()
-        self.sprite:draw(pos);
-    end
-}
+local Chair = function(pos)
+    return Object:new({
+        pos = pos,
+        sprite = Sprite:new(Rectangle:new(36, 0, 9, 16), black),
+        draw = function(this)
+            this.sprite:draw(this.pos)
+        end
+    })
+end
 
-return Object:new(Chair);
+return Chair;

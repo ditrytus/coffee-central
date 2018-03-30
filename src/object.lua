@@ -13,7 +13,8 @@ function Object:draw()
     end
     if self.children ~= nil then
       for i = 1, #self.children do
-        self.children[i]:draw()
+        local child = self.children[i]
+        child:draw(child)
       end
     end
   end
@@ -26,7 +27,8 @@ function Object:init()
     end
     if self.children ~= nil then
       for i = 1, #self.children do
-        self.children[i]:init()
+        local child = self.children[i]
+        child:init(child);
       end
     end
   end
@@ -39,7 +41,8 @@ function Object:update()
     end
     if self.children ~= nil then
       for i = 1, #self.children do
-        self.children[i]:update()
+        local child = self.children[i]
+        child:update(child)
       end
     end
   end
