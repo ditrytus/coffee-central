@@ -12,9 +12,9 @@ game = require("game")
 
 function _init()
   game:init()
-  initSprites()
-  initMenu()
-  initCounter()
+  -- initSprites()
+  -- initMenu()
+  -- initCounter()
 end
 
 function _update()
