@@ -7,7 +7,7 @@ local Chair = function(pos)
     return Object:new({
         pos = pos,
         sprite = Sprite:new(Rectangle:new(36, 0, 9, 16), black),
-        draw = function(this)
+        _draw = function(this)
             this.sprite:draw(this.pos)
         end
     })

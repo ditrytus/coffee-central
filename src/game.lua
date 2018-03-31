@@ -4,11 +4,12 @@ local chair = require("chair")
 local table = require("table")
 
 local GameScene = {
-    init = nil,
     children = {
         floor,
-        chair(Point:new(50, 50)),
-        table(Point:new(100, 100))
+        table(Point:new(39, 73)),
+        table(Point:new(99, 73)),
+        table(Point:new(9, 87)),
+        table(Point:new(69, 87))
     }
 }
 
