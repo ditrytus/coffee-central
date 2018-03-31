@@ -2,6 +2,7 @@ require("object")
 require("colors")
 require("rectangle")
 require("point")
+require("draw")
 
 local Counter = {
     counterRect = Rectangle:new(2, 7, 14, 2) * 8,
