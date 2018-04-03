@@ -12,10 +12,18 @@ local Counter = {
         this.passageRect.width = this.passageRect.width + 1
     end,
     _draw = function(this)
-        roundRect(this.counterRect, 3, black, brown)
-        borderRect(this.counterSurfaceRect, brown, black)
-        borderRect(this.passageRect:move(Point:new(0, 2)), brown, black)
-        borderRect(this.passageRect, brown, black)
+
+        local counter_color = mixColor(dark_gray, indigo)
+        local counter_pattern = 0x8888
+        roundRect(this.counterRect, 3, black, counter_color, counter_pattern)
+        borderRect(this.passageRect:move(Point:new(0, 2)), counter_color, black, counter_pattern)
+
+        local surface_color = mixColor(brown, dark_gray)
+        local surface_pattern = 0xc3c3
+        borderRect(this.counterSurfaceRect, surface_color, black, surface_pattern)
+        borderRect(this.passageRect, surface_color, black, surface_pattern)
+
+        fillp()
     end
 }
 
