@@ -23,10 +23,10 @@ function roundRect(rectangle, rad, borderColor, fillColor, fillPattern)
   drawCorner(bottom_right, bottom_right + Point:new(-1, -1), rad, fillColor, borderColor)
 
   clip(top_left.x, rectangle.y, top_right.x - top_left.x, rectangle.height)
-  borderRect(rectangle, fillColor, borderColor)
+  borderRect(rectangle, fillColor, borderColor, fillPattern)
 
   clip(rectangle.x, top_left.y, rectangle.width, bottom_left.y - top_left.y)
-  borderRect(rectangle, fillColor, borderColor)
+  borderRect(rectangle, fillColor, borderColor, fillPattern)
 
   clip()
   fillp()
