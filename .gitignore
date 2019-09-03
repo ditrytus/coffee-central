@@ -11,3 +11,4 @@ sdl_controllers.txt
 *.js
 .vscode
 *.p8
+.DS_Store
