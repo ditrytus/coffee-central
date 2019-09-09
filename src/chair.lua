@@ -15,4 +15,4 @@ local Chair = function(pos, flip_x)
     })
 end
 
-return Chair;
+return Chair
