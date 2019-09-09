@@ -9,7 +9,7 @@
 	"sourceSize": {"w":9,"h":16}
 },
 {
-	"filename": "character/back/stand/stand0",
+	"filename": "character/back/stand0",
 	"frame": {"x":9,"y":0,"w":5,"h":15},
 	"rotated": false,
 	"trimmed": false,
@@ -199,6 +199,6 @@
 	"format": "RGBA8888",
 	"size": {"w":128,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:508bdc5638df4112bc3f9943487df2a1:51b8fc99cac5112ccd341459507bd649:729adc6043343cfda41c447ce8f464d6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0b98ce2530c159728b5c010c83fc5cdb:22b62870a55495565ff1b6eca82fc257:729adc6043343cfda41c447ce8f464d6$"
 }
 }

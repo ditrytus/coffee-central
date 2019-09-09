@@ -1,9 +1,10 @@
 require("object")
 require("colors")
 require("sprite")
+require("spritesheet")
 
 local Panel = {
-    sprite = Sprite:new(Rectangle:new(0, 0, 16, 14), white),
+    sprite = Sprite:fromSheet(spritesheet.cup, black),
     _init = function(this)
         this.menuRect = Rectangle:new(0, 13, 16, 3) * 8
 

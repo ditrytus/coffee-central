@@ -10,14 +10,11 @@ if (Args.Count != 2)
 }
 
 using (var reader = File.OpenText(Args[0]))
-using (var writer = new StreamWriter(File.OpenWrite(Args[1])))
+using (var writer = File.CreateText(Args[1]))
 {
     var root = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
 
-    var tableName = "Sprites";
-
-    writer.WriteLine("require(\"sprite\")");
-    writer.WriteLine();
+    var tableName = "spritesheet";
 
     var groupedFrames = new Dictionary<string, object>();
     foreach(var frame in (JArray)root["frames"])
@@ -42,29 +39,36 @@ using (var writer = new StreamWriter(File.OpenWrite(Args[1])))
             groupNode = (Dictionary<string, object>)groupNode[segment];
         }
     }
-
-    var prefix = tableName;
     
-    void Foo(string prefix, Dictionary<string, object> group)
+    void GenerateLua(int indentLevel, string variableName, object node, bool isLast)
     {
-        writer.WriteLine($"{prefix} = {{}}");
-        foreach (var keyval in group)
+        var indent = new String(' ', indentLevel);
+        writer.Write(indent);
+        if (!string.IsNullOrEmpty(variableName))
         {
-            var assignable = $"{prefix}[\"{keyval.Key}\"]";
-            switch(keyval.Value)
-            {
-                case JObject frame:
-                    var frameRect = frame["frame"];
-                    writer.WriteLine($"{assignable} = Sprite:new(Rectangle:new({frameRect["x"]}, {frameRect["y"]}, {frameRect["w"]}, {frameRect["h"]}), black)");
-                    break;
-                case Dictionary<string, object> subGroup:
-                    Foo(assignable, subGroup);
-                    break;
-                default:
-                    throw new InvalidOperationException($"Type {keyval.Value.GetType().FullName} was not expected.");
-            }
+            writer.Write($"{variableName} = ");
         }
+        switch(node)
+        {
+            case JObject frame:
+                var frameRect = frame["frame"];
+                writer.Write($"{{x={frameRect["x"]}, y={frameRect["y"]}, w={frameRect["w"]}, h={frameRect["h"]}}}");
+                break;
+            case Dictionary<string, object> group:
+                writer.WriteLine($"{{");
+                var isArray = group.Values.All(v => v is JObject);
+                for (int i = 0; i < group.Count; i++)
+                {
+                    var keyval = group.ElementAt(i);
+                    GenerateLua(indentLevel + 1, isArray ? string.Empty : keyval.Key, keyval.Value, i == group.Count - 1);
+                }
+                writer.Write($"{indent}}}");
+                break;
+            default:
+                throw new InvalidOperationException($"Type {node.GetType().FullName} was not expected.");
+        }
+        writer.WriteLine(isLast ? string.Empty : ",");
     }
 
-    Foo(tableName, groupedFrames);
+    GenerateLua(0, tableName, groupedFrames, true);
 }

@@ -12,6 +12,10 @@ function Sprite:new(rect, backColor)
     return sprite
 end
 
+function Sprite:fromSheet(sheet, backColor)
+    return Sprite:new(Rectangle:fromSheet(sheet), backColor)
+end
+
 function Sprite:draw(pos, flip_x)
     local sRect = self.rect
     if flip_x == nil then

@@ -20,6 +20,10 @@ function Rectangle:new(x, y, w, h)
     return rectangle
 end
 
+function Rectangle:fromSheet(sheet)
+    return Rectangle:new(sheet.x, sheet.y, sheet.w, sheet.h)
+end
+
 function Rectangle:move(point)
     return Rectangle:new(self.x + point.x, self.y + point.y, self.width, self.height)
 end
