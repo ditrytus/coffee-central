@@ -1,9 +1,18 @@
-version: "3"
+version: "3.4"
 services:
+
+  sprites:
+    build:
+      context: .
+      target: sprites
+    volumes:
+      - "./carts:/carts"
+      - "./src:/src"
 
   cart:
     build:
       context: .
+      target: cart
     volumes:
       - "./carts:/carts"
       - "./src:/src"

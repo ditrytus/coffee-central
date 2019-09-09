@@ -1,2 +1,3 @@
 #!/bin/bash
-docker-compose up
+docker-compose up sprites
+docker-compose up cart
