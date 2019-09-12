@@ -2,7 +2,7 @@ spritesheet = {
  chair = {x=0, y=0, w=9, h=16},
  character = {
   back = {
-   stand0 = {x=9, y=0, w=5, h=15},
+   stand = {x=9, y=0, w=5, h=15},
    walk = {
     {x=14, y=0, w=5, h=15},
     {x=19, y=0, w=5, h=15},

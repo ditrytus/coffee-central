@@ -18,3 +18,7 @@ function Point:new(x, y)
   self.__index = self
   return point
 end
+
+function Point:floor()
+    return Point:new(flr(self.x), flr(self.y))
+end
