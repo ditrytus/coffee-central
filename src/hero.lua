@@ -5,6 +5,7 @@ require("sprite")
 require("spritesheet")
 require("flipbook")
 require("keys")
+require("colors")
 
 local Hero = function(startPos)
     return Object:new({
@@ -14,20 +15,20 @@ local Hero = function(startPos)
         frame = 0,
         frameRate = 10.0,
         lastFrameTime = 0,
-        walkingSpeed = 5.0,
+        walkingSpeed = 30.0,
         lastUpdate = t(),
         gfx = {
             side = {
-                stand = Flipbook:fromSheetArray({spritesheet.character.side.stand}),
-                walk = Flipbook:fromSheetArray(spritesheet.character.side.walk)
+                stand = Flipbook:fromSheetArray({spritesheet.character.side.stand}, pink),
+                walk = Flipbook:fromSheetArray(spritesheet.character.side.walk, pink)
             },
             front = {
-                stand = Flipbook:fromSheetArray({spritesheet.character.front.stand}),
-                walk = Flipbook:fromSheetArray(spritesheet.character.front.walk)
+                stand = Flipbook:fromSheetArray({spritesheet.character.front.stand}, pink),
+                walk = Flipbook:fromSheetArray(spritesheet.character.front.walk, pink)
             },
             back = {
-                stand = Flipbook:fromSheetArray({spritesheet.character.back.stand}),
-                walk = Flipbook:fromSheetArray(spritesheet.character.back.walk)
+                stand = Flipbook:fromSheetArray({spritesheet.character.back.stand}, pink),
+                walk = Flipbook:fromSheetArray(spritesheet.character.back.walk, pink)
             }
         },
         _draw = function(this)
