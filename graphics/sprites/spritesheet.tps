@@ -32,7 +32,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>json-array</string>
         <key>textureFileName</key>
         <filename>../../carts/spritesheet.png</filename>
         <key>flipPVR</key>
@@ -194,7 +194,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">character/back/stand/stand0.png</key>
+            <key type="filename">character/back/stand.png</key>
             <key type="filename">character/back/walk/character_back_walk0.png</key>
             <key type="filename">character/back/walk/character_back_walk1.png</key>
             <key type="filename">character/back/walk/character_back_walk2.png</key>
