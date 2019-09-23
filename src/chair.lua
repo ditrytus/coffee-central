@@ -8,7 +8,7 @@ local Chair = function(pos, flip_x)
     return Object:new({
         pos = pos,
         flip_x = flip_x,
-        sprite = Sprite:fromSheet(spritesheet.chair, black),
+        sprite = Sprite:fromSheet(spritesheet.chair, pink),
         _draw = function(this)
             this.sprite:draw(this.pos, this.flip_x)
         end
