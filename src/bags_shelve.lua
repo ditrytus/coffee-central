@@ -7,9 +7,9 @@ local BagsShelve = function(pos)
         pos = pos,
         children = {
             shelve(pos),
-            bag(pos + Point:new(11, -8), orange),
-            bag(pos + Point:new(5, -6), dark_green),
-            bag(pos + Point:new(15, -6), red)
+            bag(pos + xy(11, -8), orange),
+            bag(pos + xy(5, -6), dark_green),
+            bag(pos + xy(15, -6), red)
         }
     })
 end

@@ -6,8 +6,8 @@ local Tableset = function(pos)
     return Object:new(
         {
             children = {
-                chair(pos + Point:new(-8, 0)),
-                chair(pos + Point:new(19, 0), true),
+                chair(pos + xy(-8, 0)),
+                chair(pos + xy(19, 0), true),
                 table(pos)
             }
         }

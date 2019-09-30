@@ -5,22 +5,22 @@ require("point")
 
 function roundRect(rectangle, rad, borderColor, fillColor, fillPattern)
   local rectPos = rectangle:pos()
-  local radPoint = Point:new(rad, rad)
+  local radPoint = xy(rad, rad)
 
   local top_left = rectPos + radPoint
-  local top_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rad)
-  local bottom_left = Point:new(rectangle.x + rad, rectangle.y + rectangle.height - rad)
-  local bottom_right = Point:new(rectangle.x + rectangle.width - rad, rectangle.y + rectangle.height - rad)
+  local top_right = xy(rectangle.x + rectangle.width - rad, rectangle.y + rad)
+  local bottom_left = xy(rectangle.x + rad, rectangle.y + rectangle.height - rad)
+  local bottom_right = xy(rectangle.x + rectangle.width - rad, rectangle.y + rectangle.height - rad)
 
   iffillp(fillPattern)
 
   drawCorner(rectangle:pos(), top_left, rad, fillColor, borderColor)
 
-  drawCorner(Point:new(top_right.x, rectangle.y), top_right + Point:new(-1, 0), rad, fillColor, borderColor)
+  drawCorner(xy(top_right.x, rectangle.y), top_right + xy(-1, 0), rad, fillColor, borderColor)
 
-  drawCorner(Point:new(rectangle.x, bottom_left.y), bottom_left + Point:new(0, -1), rad, fillColor, borderColor)
+  drawCorner(xy(rectangle.x, bottom_left.y), bottom_left + xy(0, -1), rad, fillColor, borderColor)
 
-  drawCorner(bottom_right, bottom_right + Point:new(-1, -1), rad, fillColor, borderColor)
+  drawCorner(bottom_right, bottom_right + xy(-1, -1), rad, fillColor, borderColor)
 
   clip(top_left.x, rectangle.y, top_right.x - top_left.x, rectangle.height)
   borderRect(rectangle, fillColor, borderColor, fillPattern)

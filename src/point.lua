@@ -22,3 +22,7 @@ end
 function Point:floor()
     return Point:new(flr(self.x), flr(self.y))
 end
+
+function xy(x, y)
+    return Point:new(x, y)
+end

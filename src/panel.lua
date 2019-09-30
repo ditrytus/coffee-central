@@ -13,7 +13,7 @@ local Panel = {
         this.coffeePanelRect =
             Rectangle:new(this.menuRect.x + coffeePanelPadding, this.menuRect.y + coffeePanelPadding, size, size)
 
-        this.handPanelRect = this.coffeePanelRect:move(Point:new(this.coffeePanelRect.width + 1, 0))
+        this.handPanelRect = this.coffeePanelRect:move(xy(this.coffeePanelRect.width + 1, 0))
     end,
     _draw = function(this)
         local radius = 3

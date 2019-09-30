@@ -16,7 +16,7 @@ local Counter = {
         local counter_color = mixColor(dark_gray, indigo)
         local counter_pattern = 0x8888
         roundRect(this.counterRect, 3, black, counter_color, counter_pattern)
-        borderRect(this.passageRect:move(Point:new(0, 2)), counter_color, black, counter_pattern)
+        borderRect(this.passageRect:move(xy(0, 2)), counter_color, black, counter_pattern)
 
         local surface_color = mixColor(brown, dark_gray)
         local surface_pattern = 0xc3c3

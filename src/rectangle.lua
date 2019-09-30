@@ -29,9 +29,9 @@ function Rectangle:move(point)
 end
 
 function Rectangle:pos()
-    return Point:new(self.x, self.y)
+    return xy(self.x, self.y)
 end
 
 function Rectangle:pos2()
-    return Point:new(self.x + self.width - 1, self.y + self.height - 1)
+    return xy(self.x + self.width - 1, self.y + self.height - 1)
 end

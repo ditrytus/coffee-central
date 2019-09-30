@@ -9,13 +9,13 @@ local bagsShelve = require("bags_shelve")
 local GameScene = {
     children = {
         background,
-        bagsShelve(Point:new(32, 15)),
-        hero(Point:new(20, 20)),
+        bagsShelve(xy(32, 15)),
+        hero(xy(20, 20)),
         counter,
-        tableset(Point:new(39, 73)),
-        tableset(Point:new(99, 73)),
-        tableset(Point:new(9, 87)),
-        tableset(Point:new(69, 87)),
+        tableset(xy(39, 73)),
+        tableset(xy(99, 73)),
+        tableset(xy(9, 87)),
+        tableset(xy(69, 87)),
         panel
     }
 }
