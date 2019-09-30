@@ -1,13 +1,15 @@
 require("object")
-local floor = require("floor")
+local background = require("background")
 local tableset = require("tableset")
 local panel = require("panel")
 local counter = require("counter")
 local hero = require("hero")
+local bagsShelve = require("bags_shelve")
 
 local GameScene = {
     children = {
-        floor,
+        background,
+        bagsShelve(Point:new(32, 15)),
         hero(Point:new(20, 20)),
         counter,
         tableset(Point:new(39, 73)),

@@ -4,7 +4,6 @@ require("sprite")
 require("spritesheet")
 
 local Panel = {
-    sprite = Sprite:fromSheet(spritesheet.cup, black),
     _init = function(this)
         this.menuRect = Rectangle:new(0, 13, 16, 3) * 8
 
@@ -21,8 +20,6 @@ local Panel = {
         roundRect(this.menuRect, radius, black, brown)
         roundRect(this.coffeePanelRect, radius, black, white)
         roundRect(this.handPanelRect, radius, black, white)
-
-        this.sprite:draw(this.coffeePanelRect:pos() + Point:new(2, 3))
     end
 }
 
