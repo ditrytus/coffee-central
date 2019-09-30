@@ -5,9 +5,9 @@ require("point")
 require("draw")
 
 local Counter = {
-    counterRect = Rectangle:new(2, 7, 14, 2) * 8,
-    counterSurfaceRect = Rectangle:new(2, 7, 14, 1) * 8,
-    passageRect = Rectangle:new(0, 7, 2, 1) * 8,
+    counterRect = xywh(2, 7, 14, 2) * 8,
+    counterSurfaceRect = xywh(2, 7, 14, 1) * 8,
+    passageRect = xywh(0, 7, 2, 1) * 8,
     _init = function(this)
         this.passageRect.width = this.passageRect.width + 1
     end,

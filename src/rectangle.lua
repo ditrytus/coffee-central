@@ -25,7 +25,8 @@ function Rectangle:fromSheet(sheet)
 end
 
 function Rectangle:move(point)
-    return Rectangle:new(self.x + point.x, self.y + point.y, self.width, self.height)
+    newpos = self:pos() + point
+    return Rectangle:new(newpos.x, newpos.y, self.width, self.height)
 end
 
 function Rectangle:pos()
@@ -34,4 +35,8 @@ end
 
 function Rectangle:pos2()
     return xy(self.x + self.width - 1, self.y + self.height - 1)
+end
+
+function xywh(x, y, w, h)
+    return Rectangle:new(x, y, w, h)
 end
